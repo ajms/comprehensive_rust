@@ -1,6 +1,8 @@
 mod borwein_pi;
 mod exercises;
+mod health_statistics;
 mod library;
+mod polygon;
 
 fn main() {
     borwein_pi::approximate_pi(3);
@@ -8,4 +10,6 @@ fn main() {
     exercises::exercise2();
     library::test_library();
     exercises::exercise4();
+    health_statistics::health_stats();
+    polygon::exercise7();
 }

@@ -42,3 +42,26 @@ pub fn exercise2() {
     println!("transposed:");
     pretty_print(&transposed);
 }
+
+pub fn exercise4() {
+    let v: Vec<i8> = vec![10, 20, 30];
+    let mut iter = v.iter();
+
+    let v0: Option<&i8> = iter.next();
+    println!("v0: {v0:?}");
+    let v: Vec<String> = vec![String::from("foo"), String::from("bar")];
+    let mut iter = v.into_iter();
+
+    let v0: Option<String> = iter.next();
+    println!("v0: {v0:?}");
+
+    let v: Vec<String> = vec![String::from("foo"), String::from("bar")];
+    // type &String
+    for word in &v {
+        println!("word: {word}");
+    }
+    // type String
+    for word in v {
+        println!("word: {word}");
+    }
+}

@@ -2,6 +2,7 @@ mod borwein_pi;
 mod exercises;
 mod health_statistics;
 mod library;
+mod luhn_alg;
 mod polygon;
 
 fn main() {
@@ -12,4 +13,5 @@ fn main() {
     exercises::exercise4();
     health_statistics::health_stats();
     polygon::exercise7();
+    luhn_alg::exercise8();
 }

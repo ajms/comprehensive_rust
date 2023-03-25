@@ -1,54 +1,30 @@
 pub fn prefix_matches(prefix: &str, request_path: &str) -> bool {
     println!("prefix {}, request path {}", prefix, request_path);
     let mut prefix_iter = prefix.split("*/");
-    let flag = match prefix_iter.next() {
-        None => (false, false, false, 0),
-        Some(p) => (
-            request_path.starts_with(p),
-            request_path == p,
-            p == prefix,
-            p.len(),
-        ),
-    };
-    if flag.0 {
-        let mut remaining_path: String = request_path[flag.3..].to_string();
-        while let Some(prefix_elt) = prefix_iter.next() {
-            println!("prefix_iter: {:?}", prefix_elt);
-            // let mut prefix_elt_compl = prefix_elt.to_string();
-            // if !prefix_elt_compl.ends_with('/') && prefix_elt_compl != remaining_path {
-            //     prefix_elt_compl.push('/');
-            // }
-            if let Some(idx) = remaining_path.find(&prefix_elt) {
-                println!(
-                    "idx in remaining path: {}, remaining path: {}",
-                    idx + prefix_elt.len(),
-                    remaining_path
-                );
-                if remaining_path.len() == idx + prefix_elt.len() {
-                    return true;
-                } else if !prefix_elt.ends_with('/')
-                    && !(remaining_path[idx + prefix_elt.len()..idx + prefix_elt.len() + 1] == *"/")
-                {
-                    println!(
-                        "{}",
-                        remaining_path[idx + prefix_elt.len()..idx + prefix_elt.len() + 1]
-                            .to_string()
-                    );
-                    return false;
-                } else {
-                    remaining_path = remaining_path[idx + prefix_elt.len()..].to_string();
-                    println!("shorten");
-                }
-            } else {
+
+    let mut remaining_path: String = request_path.to_string();
+    while let Some(prefix_elt) = prefix_iter.next() {
+        println!("prefix_iter: {:?}", prefix_elt);
+        if let Some(idx) = remaining_path.find(&prefix_elt) {
+            println!(
+                "idx in remaining path: {}, remaining path: {}",
+                idx + prefix_elt.len(),
+                remaining_path
+            );
+            if remaining_path.len() == idx + prefix_elt.len() {
+                return true;
+            } else if !prefix_elt.ends_with('/')
+                && !(remaining_path[idx + prefix_elt.len()..idx + prefix_elt.len() + 1] == *"/")
+            {
                 return false;
+            } else {
+                remaining_path = remaining_path[idx + prefix_elt.len()..].to_string();
             }
-        }
-        if !flag.1 && flag.2 {
+        } else {
             return false;
         }
-        return true;
     }
-    return false;
+    return true;
 }
 
 pub fn exercise9() {

@@ -1,5 +1,6 @@
 mod borwein_pi;
 mod exercises;
+mod gui_library;
 mod health_statistics;
 mod library;
 mod luhn_alg;
@@ -16,4 +17,5 @@ fn main() {
     polygon::exercise7();
     luhn_alg::exercise8();
     webserver_routing::exercise9();
+    gui_library::exercise11();
 }
